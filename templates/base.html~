@@ -1,7 +1,6 @@
 {% extends 'bootstrap/base.html'%}
 {% block head %}
 {{ super() }}
-{{ moment.lang("zh-CN") }} 
 <link rel="shortcut icon" href="{{url_for('static',filename='icon_facebook.png')}}"
 	type="image/x-icon">
 <link rel="icon" href="{{url_for('static',filename='icon_facebook.png')}}"
