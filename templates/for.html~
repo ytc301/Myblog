@@ -1,3 +1,0 @@
-{% comment in comments %}
-	<li>{{ comment }}</li>
-{% endfor %}
