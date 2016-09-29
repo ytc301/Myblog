@@ -18,6 +18,7 @@ from flask.ext.mail import Mail,Message
 from threading import Thread
 import os
 
+
 class NameForm(Form):
     name=StringField('what is your name?',validators=[Required()])
     submit=SubmitField('Submit')
