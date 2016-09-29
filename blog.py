@@ -17,7 +17,7 @@ from flask.ext.migrate import Migrate,MigrateCommand
 from flask.ext.mail import Mail,Message
 from threading import Thread
 import os
-#v2.5
+#v2.6
 
 class NameForm(Form):
     name=StringField('what is your name?',validators=[Required()])
