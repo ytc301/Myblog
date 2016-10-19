@@ -1,4 +1,4 @@
-#!/home/hyman/projects/blog/env/bin/python
+#!/home/hyman/projects/Myblog/env/bin/python
 
 import sys
 import getopt
