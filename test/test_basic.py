@@ -19,3 +19,4 @@ class BasicTestCase(unittest.TestCase):
 
     def test_app_is_testing(self):
         self.assertFalse(current_app.config['TESTING'])
+
