@@ -1,7 +1,7 @@
-from flask.ext.wtf import Form
-from wtforms import StringField,SubmitField
-from wtforms.validators import Required
+from flask_wtf import FlaskForm
+from wtforms import TextField,SubmitField
+from wtforms.validators import DataRequired
 
-class NameForm(Form):
-    name=StringField('what is your name?',validators=[Required()])
+class NameForm(FlaskForm):
+    name=TextField('what is your name?',validators=[DataRequired()])
     submit=SubmitField('Submit')
