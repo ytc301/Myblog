@@ -31,6 +31,7 @@ def register():
     if form.validate_on_submit():
         user = User(email=form.email.data,username=form.username.data,password=form.password.data)
         db.session.add(user)
+        db.session.commit()
         #生成令牌
         token=user.generate_confirmation_token()
         send_email(user.email,'Confirm your account','auth/email/confirm',user=user,token=token)

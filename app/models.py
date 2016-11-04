@@ -1,6 +1,6 @@
 #! -*-coding:utf-8-*-
 
-from app import db
+from app import db,log
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin
 from . import login_manager
@@ -43,17 +43,23 @@ class User(UserMixin,db.Model):
     #生成令牌
     def generate_confirmation_token(self,expiration=3600):
         s=Serializer(current_app.config['SECRET_KEY'],expiration)
-        return s.dumps({'confirm':self.id})
+        token = s.dumps({'confirm':self.id})
+        log.write('self.id=',self.id)
+        log.write('source token=',token)
+        return token
 
     #确认令牌正确性
     def confirm(self,token):
+        log.write('dest token=',token)
         s=Serializer(current_app.config['SECRET_KEY'])
         try:
-            data=s.load(token)
+            data=s.loads(token)
+            log.write('data =',data)
         except:
-            return false
+            return False
+        log.write('self.id=',self.id)
         if data.get('confirm')!=self.id:
-            return false
+            return False
         self.confirmed=True
         db.session.add(self)
         return True

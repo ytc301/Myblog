@@ -5,6 +5,7 @@ from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
 from config import config
 from flask_login import LoginManager
+from log import log
 
 bootstrap=Bootstrap()
 mail=Mail()
@@ -13,7 +14,7 @@ db=SQLAlchemy()
 login_manager=LoginManager()
 login_manager.session_protection='strong'
 login_manager.login_view='auth.login'
-
+log=log()
 
 def create_app(config_name):
     app=Flask(__name__)
