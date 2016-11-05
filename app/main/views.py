@@ -1,12 +1,12 @@
 from datetime import datetime
 from flask import render_template,session,redirect,url_for,current_app
-
+from decorators import admin_required,permission_required
 from . import main
 from .forms import NameForm
 from .. import db
-from ..models import User
+from ..models import User,Permission
 from .. import mail
-
+from flask_login import login_required
 
 @main.route('/',methods=['GET','POST'])
 def index():
@@ -27,3 +27,15 @@ def index():
         return redirect(url_for('main.index'))
     return render_template('index.html',form=form,name=session.get('name'),
             known=session.get('known',False))
+
+@main.route('/admin',methods=['GET','POST'])
+@login_required
+@admin_required
+def for_admins_only():
+    return "for administrator"
+
+@main.route('/moderator')
+@login_required
+@permission_required(Permission.MODERATE_COMMENTS)
+def for_moderators_only():
+    return "for comment moderators!"
