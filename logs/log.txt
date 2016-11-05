@@ -101,3 +101,4 @@
 [2016-11-05 20:51:31]:dest token=eyJhbGciOiJIUzI1NiIsImV4cCI6MTQ3ODM1MzM2MiwiaWF0IjoxNDc4MzQ5NzYyfQ.eyJjb25maXJtIjoxfQ.b9PzBYI9quS1xiEUOFCf3fXVcg12f5ubjYCYJmNG_-8
 [2016-11-05 20:51:31]:data ={u'confirm': 1}
 [2016-11-05 20:51:31]:self.id=1
+[2016-11-05 20:59:45]:admin_requiredadmin_required
