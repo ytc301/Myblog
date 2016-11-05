@@ -75,3 +75,29 @@
 [2016-11-05 20:04:52]:admin_requiredadmin_required
 [2016-11-05 20:10:04]:admin_requiredadmin_required
 [2016-11-05 20:10:06]:admin_requiredadmin_required
+[2016-11-05 20:31:29]:admin_requiredadmin_required
+[2016-11-05 20:31:30]:admin_requiredadmin_required
+[2016-11-05 20:33:42]:admin_requiredadmin_required
+[2016-11-05 20:33:52]:admin_requiredadmin_required
+[2016-11-05 20:34:28]:admin_requiredadmin_required
+[2016-11-05 20:34:46]:admin_requiredadmin_required
+[2016-11-05 20:35:03]:admin_requiredadmin_required
+[2016-11-05 20:35:18]:admin_requiredadmin_required
+[2016-11-05 20:35:27]:admin_requiredadmin_required
+[2016-11-05 20:37:06]:admin_requiredadmin_required
+[2016-11-05 20:37:12]:admin_requiredadmin_required
+[2016-11-05 20:39:11]:admin_requiredadmin_required
+[2016-11-05 20:39:17]:admin_requiredadmin_required
+[2016-11-05 20:39:55]:admin_requiredadmin_required
+[2016-11-05 20:40:07]:admin_requiredadmin_required
+[2016-11-05 20:41:58]:admin_requiredadmin_required
+[2016-11-05 20:41:59]:admin_requiredadmin_required
+[2016-11-05 20:42:21]:self.id=1
+[2016-11-05 20:42:21]:source token=eyJhbGciOiJIUzI1NiIsImV4cCI6MTQ3ODM1MzM0MSwiaWF0IjoxNDc4MzQ5NzQxfQ.eyJjb25maXJtIjoxfQ.IwaXzvR44UAL_-OQPN1NBn-GaxN_mGXgwpTN2R7c4xw
+[2016-11-05 20:42:42]:self.id=1
+[2016-11-05 20:42:42]:source token=eyJhbGciOiJIUzI1NiIsImV4cCI6MTQ3ODM1MzM2MiwiaWF0IjoxNDc4MzQ5NzYyfQ.eyJjb25maXJtIjoxfQ.b9PzBYI9quS1xiEUOFCf3fXVcg12f5ubjYCYJmNG_-8
+[2016-11-05 20:47:50]:admin_requiredadmin_required
+[2016-11-05 20:50:30]:admin_requiredadmin_required
+[2016-11-05 20:51:31]:dest token=eyJhbGciOiJIUzI1NiIsImV4cCI6MTQ3ODM1MzM2MiwiaWF0IjoxNDc4MzQ5NzYyfQ.eyJjb25maXJtIjoxfQ.b9PzBYI9quS1xiEUOFCf3fXVcg12f5ubjYCYJmNG_-8
+[2016-11-05 20:51:31]:data ={u'confirm': 1}
+[2016-11-05 20:51:31]:self.id=1
