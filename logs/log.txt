@@ -102,3 +102,13 @@
 [2016-11-05 20:51:31]:data ={u'confirm': 1}
 [2016-11-05 20:51:31]:self.id=1
 [2016-11-05 20:59:45]:admin_requiredadmin_required
+[2016-11-06 14:26:48]:admin_requiredadmin_required
+[2016-11-06 14:26:50]:admin_requiredadmin_required
+[2016-11-06 14:48:08]:admin_requiredadmin_required
+[2016-11-06 14:48:08]:admin_requiredadmin_required
+[2016-11-06 14:48:17]:admin_requiredadmin_required
+[2016-11-06 14:56:28]:admin_requiredadmin_required
+[2016-11-06 15:01:56]:admin_requiredadmin_required
+[2016-11-06 15:01:56]:admin_requiredadmin_required
+[2016-11-06 15:02:44]:admin_requiredadmin_required
+[2016-11-06 15:16:40]:admin_requiredadmin_required
