@@ -2,31 +2,23 @@ from datetime import datetime
 from flask import render_template,session,redirect,url_for,current_app,flash
 from decorators import admin_required,permission_required
 from . import main
-from .forms import NameForm,EditProfileForm,EditProfileAdminForm
+from .forms import NameForm,EditProfileForm,EditProfileAdminForm,PostForm
 from .. import db
-from ..models import User,Permission,Role
+from ..models import User,Permission,Role,Post
 from .. import mail
 from flask_login import login_required,current_user
 
 @main.route('/',methods=['GET','POST'])
 def index():
-    name=None
-    form=NameForm()
-    if form.validate_on_submit():
-        user=User.query.filter_by(username=form.name.data).first()
-        if user is None:
-            user =User(username=form.name.data)
-            db.session.add(user)
-            session['konwn'] = False
-            if current_app.config['FLASKY_ADMIN']:
-                mail.send(msg)
-        else:
-            session['known'] = True
-        session['name']= form.name.data
-        form.name.data=''
-        return redirect(url_for('main.index'))
-    return render_template('index.html',form=form,name=session.get('name'),
-            known=session.get('known',False))
+    form=PostForm()
+    if current_user.can(Permission.WRITE_ARTICLES) and \
+            form.validate_on_submit():
+        post=Post(body=form.body.data,
+                    author=current_user._get_current_object())
+        db.session.add(post)
+        return redirect(url_for('.index'))
+    posts=Post.query.order_by(Post.timestamp.desc()).all();
+    return render_template('index.html',form=form,posts=posts)
 
 @main.route('/admin',methods=['GET','POST'])
 @login_required
@@ -88,3 +80,4 @@ def edit_profile_admin(id):
     form.location.data=user.location
     form.about_me.data=user.about_me
     return render_template('edit_profile.html',form=form,user=user)
+
