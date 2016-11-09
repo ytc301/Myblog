@@ -33,6 +33,8 @@
 			{% endif %}		
 		{% endif %}
 	</p>
-	<img class="img-rounded profile-thumbnail" src="{{ user.gravatar()) }}">
+	<img class="img-rounded profile-thumbnail" src="{{ user.gravatar() }}">
+	<h3>Posts by {{ user.username}}</h3>
+	{% include '_posts.html '%}
 </div>
 {% endblock %}
