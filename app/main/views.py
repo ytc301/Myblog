@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import render_template,session,redirect,url_for,current_app,flash
+from flask import render_template,session,redirect,url_for,current_app,flash,request
 from decorators import admin_required,permission_required
 from . import main
 from .forms import NameForm,EditProfileForm,EditProfileAdminForm,PostForm
@@ -17,8 +17,12 @@ def index():
                     author=current_user._get_current_object())
         db.session.add(post)
         return redirect(url_for('.index'))
-    posts=Post.query.order_by(Post.timestamp.desc()).all();
-    return render_template('index.html',form=form,posts=posts)
+    page=request.args.get('page',1,type=int)
+    pagination=Post.query.order_by(Post.timestamp.desc()).paginate(
+    page,per_page=current_app.config['FLASK_POSTS_PRE_PAGE'],
+    error_out=False)
+    posts=pagination.items
+    return render_template('index.html',form=form,posts=posts,pagination=pagination)
 
 @main.route('/admin',methods=['GET','POST'])
 @login_required
