@@ -201,7 +201,7 @@ class Post(db.Model):
             db.session.commit()
     @staticmethod
     def on_changed_body(target,value,oldvalue,initiator):
-        allowd_tags=['a','abbr','acronym','b','blockquote','code','em','li','i','ol','pre','strong','ul','h1','h2','h3','p']
+        allowed_tags=['a','abbr','acronym','b','blockquote','code','em','li','i','ol','pre','strong','ul','h1','h2','h3','p']
         target.body_html=bleach.linkify(bleach.clean(markdown(value,output_format='html'),tags=allowed_tags,strip=True))
 
 db.event.listen(Post.body,'set',Post.on_changed_body)
