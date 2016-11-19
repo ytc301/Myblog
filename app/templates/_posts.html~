@@ -14,7 +14,6 @@
 			</a>
 		</div>
 		<div class="post-body">{{ post.body }}</div>
-		{{post.body}}
 		</li>		
 	{% endfor %}
 </ul>
