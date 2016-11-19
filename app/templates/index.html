@@ -4,6 +4,10 @@
 {% block title %}
 	Flasky
 {% endblock%}
+{% block scripts %}
+	{{ super() }}
+	{{ pagedown.include_pagedown() }}
+{% endblock %}
 {% block page_content %}
 <div>
 	{% if current_user.can(Permission.WRITE_ARTICLES)%}

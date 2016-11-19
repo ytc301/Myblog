@@ -4,6 +4,10 @@
 {% block title %}
 	Flasky
 {% endblock%}
+{% block scripts %}
+	{{ supper() }}
+	{{ pagedown.include_pagedown() }}
+{% endblock %}
 {% block page_content %}
 <div>
 	{% if current_user.can(Permission.WRITE_ARTICLES)%}
@@ -11,7 +15,6 @@
 	{% endif %}
 </div>
 <ul class="posts">
-	{%for post in posts %}
 		{% include '_posts.html' %}
 		{% if pagination %}
 		<div class="pagination">
