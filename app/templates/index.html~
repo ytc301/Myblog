@@ -5,7 +5,7 @@
 	Flasky
 {% endblock%}
 {% block scripts %}
-	{{ supper() }}
+	{{ super() }}
 	{{ pagedown.include_pagedown() }}
 {% endblock %}
 {% block page_content %}

@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import render_template,session,redirect,url_for,current_app,flash,request
+from flask import render_template,session,redirect,url_for,current_app,flash,request,make_response
 from decorators import admin_required,permission_required
 from . import main
 from .forms import NameForm,EditProfileForm,EditProfileAdminForm,PostForm
@@ -185,5 +185,5 @@ def show_all():
 @login_required
 def show_followed():
     resp=make_response(redirect(url_for('.index')))
-    resp.set_cookies('show_followed','1',max_age=30*24*60*60)
+    resp.set_cookie('show_followed','1',max_age=30*24*60*60)
     return resp
