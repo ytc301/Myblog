@@ -196,6 +196,10 @@ class User(UserMixin,db.Model):
     
     def is_followed_by(self,user):
         return self.followers.filter_by(follower_id=user.id).first() is not None
+    
+    @property
+    def followed_posts(self):
+        return Post.query.join(Follow.followed_id==Post.author_id).filter(Follow.follower_id==self.id)
 
 class AnonymousUser(AnonymousUserMixin):
     def can(self,permissions):
