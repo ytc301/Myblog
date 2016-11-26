@@ -13,7 +13,7 @@ from datetime import datetime
 
 class Permission:
     FOLLOW=0x01
-    COMMIT=0x02
+    COMMENT=0x02
     WRITE_ARTICLES=0x04
     MODERATE_COMMENTS=0x08
     ADMINISTER=0x80
@@ -39,12 +39,12 @@ class Role(db.Model):
     def insert_roles():
         roles={
             'User':(Permission.FOLLOW|
-                    Permission.COMMIT|
+                    Permission.COMMENT|
                     Permission.WRITE_ARTICLES,True),
 
             'Moderator':(
                     Permission.FOLLOW|
-                    Permission.COMMIT|
+                    Permission.COMMENT|
                     Permission.WRITE_ARTICLES|
                     Permission.MODERATE_COMMENTS,False),
 
