@@ -211,6 +211,20 @@ class User(UserMixin,db.Model):
                 db.session.add(user)
                 db.session.commit()
 
+    def generate_auth_token(self,expiration):
+        s=Serializer(current_app.config['SECRET_KEY'],
+                expires_in=expiration)
+        return s.dumps({'id':self.id})
+
+    @staticmethod
+    def vertify_auth_token(token):
+        s=Serializer(current_app.config['SECRET_KEY'])
+        try:
+            data=s.loads(token)
+        except:
+            return None
+        return User.query.get(data['id'])
+
 class AnonymousUser(AnonymousUserMixin):
     def can(self,permissions):
         return False
