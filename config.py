@@ -27,6 +27,7 @@ class DevelopmentConfig(Config):
 
 class TestingConfig(Config):
     TESTING = False
+    WTF_CRSF_ENABLED=False
     SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URI') or \
             'sqlite:///' + os.path.join(basedir,'data-test.sqlite')
 
