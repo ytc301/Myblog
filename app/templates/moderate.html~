@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% import "_macros.html" as macros %}
-{% block title %}Flasky-Comment Moderation {% endblock %}
+{% block title %}CoderNest- 评论管理 {% endblock %}
 {% block page_content %}
 <div class="page-header">
 	<h1>Comment Moderation</h1>

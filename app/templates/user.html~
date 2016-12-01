@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}用户信息{% endblock %}
+{% block title %}CoderNest-用户信息{% endblock %}
 
 {% block page_content %}
 <div	class="page-header">
@@ -7,10 +7,10 @@
 	{% if current_user.can(Permission.FOLLOW) and user != current_user %}
 		{% if not current_user.is_following(user) %}
 		<a href="{{ url_for('.follow',username=user.username) }}"
-			class="btn btn-primary">Follow</a>		
+			class="btn btn-primary">关注</a>		
 		{% else %}
 		<a href="{{ url_for('.unfollow',username=user.username) }}"
-			class="btn btn-default">Unfollow</a>		
+			class="btn btn-default">不再关注</a>		
 		{% endif %}	
 	{% endif %}
 	<a href="{{ url_for('.followers',username=user.username)}}" >
@@ -19,7 +19,7 @@
 	<a href="{{ url_for('.followed_by',username=user.username) }}">
 		Following: <span class="badge">{{ user.followed.count() }}</span>
 	</a>
-	{% if current_user.is_authenticated() and user != current_user and user.is_following(current_user) %}
+	{% if current_user.is_authenticated and user != current_user and user.is_following(current_user) %}
 	  |<span class="label label-default">Follows you </span>
 	{% endif %}
 	
