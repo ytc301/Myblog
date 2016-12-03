@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+#coding:utf-8
+
 import os
 from app import create_app,db
 from app.models import User,Role,Post
@@ -23,7 +25,7 @@ manager.add_command('db',MigrateCommand)
 
 @manager.command
 def test():
-    """Run the unit tests"""
+    """运行单元测试"""
     import unittest
     tests=unittest.TestLoader().discover('tests')
     unittest.TextTestRunner(verbosity=2).run(tests)

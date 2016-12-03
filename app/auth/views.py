@@ -33,9 +33,13 @@ def login():
 
 @auth.route('/logout')
 def logout():
+    """
+    登出控制,调用flask_login的logout_user()接口.
+    """
     logout_user()
-    flash('You have been logged out.')
+    flash('退出登录成功.')
     return redirect(url_for('main.index'))
+
 
 @auth.route('/register',methods=['GET','POST'])
 def register():
