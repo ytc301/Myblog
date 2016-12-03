@@ -10,13 +10,25 @@ from ..email import send_email
 
 @auth.route('/login',methods=['GET','POST'])
 def login():
+    """
+    登录控制,向服务器发送登录的表单.
+    """
+    #声明登录表单
     form=LoginForm()
+    #POST表单时,如果点击了提交按钮,会触发validate_on_submit()事件,该接口
+    #定义在登录表单的基类FlaskForm中
     if form.validate_on_submit():
+        #根据email从数据库查询并生成user实例
         user = User.query.filter_by(email=form.email.data).first()
+        #验证用户填写的密码和user中的hash值是否符合.
         if user is not None and user.verify_password(form.password.data):
+            #通过flask_login来管理登录的用户,login_user为其一个接口,用来登录
+            #用户,第二个参数是一个布尔量,为True的话记住当前用户存到cookies中
+            #重启浏览器后不用再重复输入用户名
             login_user(user,form.remeber_me.data)
             return redirect(request.args.get('next') or url_for('main.index'))
-        flash('Invaild user name or password')
+        flash('用户名或密码错误!')
+    #使用GET时,获取表单,渲染login.html,传入声明的登录表单对象
     return render_template('auth/login.html',form=form);
 
 @auth.route('/logout')

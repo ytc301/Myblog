@@ -1,13 +1,22 @@
+#coding:utf-8
+
 from flask_wtf import FlaskForm
 from wtforms import StringField,PasswordField,BooleanField,SubmitField
 from wtforms.validators import Required,Length,Email,Regexp,EqualTo,ValidationError
 from ..models import User
 from flask import current_app
 class LoginForm(FlaskForm):
-    email=StringField('Email',validators=[Required(),Length(1,64),Email()])
-    password=PasswordField('Password',validators=[Required()])
-    remeber_me=BooleanField('Keep me logged in')
-    submit=SubmitField('Log In')
+    """
+    登录表单:
+    email -- 用户登录的email地址
+    password -- 用户登录的密码
+    remeber_me -- 用户登录时记住用户名的选项
+    submit -- 提交按钮,点击触发validate_on_submit事件
+    """
+    email=StringField('电子邮箱',validators=[Required(),Length(1,64),Email()])
+    password=PasswordField('密码',validators=[Required()])
+    remeber_me=BooleanField('记住用户名和密码')
+    submit=SubmitField('登录')
 
 class RegistrationForm(FlaskForm):
     email=StringField('Email',validators=[Required(),Length(1,64),Email()])

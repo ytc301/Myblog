@@ -1,17 +1,17 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
-{% block title %} Flasky-login {% endblock%}
+{% block title %} CoderNest-登录 {% endblock%}
 {% block page_content%}
 <div>
-   <h1>Login</h1>
+   <h1>登录</h1>
 </div>
 <div class="col-md-4">
 {{ wtf.quick_form(form) }}
 </p>
  <p>
-	New user?
+ 	还没有帐号?
 	<a href="{{ url_for("auth.register") }}" >
-		Click here to register
+		立即注册
 	</a>
 	</p>
 </div>

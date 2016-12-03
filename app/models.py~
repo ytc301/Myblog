@@ -10,7 +10,73 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app,request
 from datetime import datetime
 from app.exceptions import ValidationError
+r"""A fast and complete Python implementation of Markdown.
+[from http://daringfireball.net/projects/markdown/]
+> Markdown is a text-to-HTML filter; it translates an easy-to-read /
+> easy-to-write structured text format into HTML.  Markdown's text
+> format is most similar to that of plain text email, and supports
+> features such as headers, *emphasis*, code blocks, blockquotes, and
+> links.
+>
+> Markdown's syntax is designed not as a generic markup language, but
+> specifically to serve as a front-end to (X)HTML. You can use span-level
+> HTML tags anywhere in a Markdown document, and you can use block level
+> HTML tags (like <div> and <table> as well).
+Module usage:
+    >>> import markdown2
+    >>> markdown2.markdown("*boo!*")  # or use `html = markdown_path(PATH)`
+    u'<p><em>boo!</em></p>\n'
+    >>> markdowner = Markdown()
+    >>> markdowner.convert("*boo!*")
+    u'<p><em>boo!</em></p>\n'
+    >>> markdowner.convert("**boom!**")
+    u'<p><strong>boom!</strong></p>\n'
+This implementation of Markdown implements the full "core" syntax plus a
+number of extras (e.g., code syntax coloring, footnotes) as described on
+<https://github.com/trentm/python-markdown2/wiki/Extras>.
+"""
 
+cmdln_desc = """A fast and complete Python implementation of Markdown, a
+text-to-HTML conversion tool for web writers.
+Supported extra syntax options (see -x|--extras option below and
+see <https://github.com/trentm/python-markdown2/wiki/Extras> for details):
+* code-friendly: Disable _ and __ for em and strong.
+* cuddled-lists: Allow lists to be cuddled to the preceding paragraph.
+* fenced-code-blocks: Allows a code block to not have to be indented
+  by fencing it with '```' on a line before and after. Based on
+  <http://github.github.com/github-flavored-markdown/> with support for
+  syntax highlighting.
+* footnotes: Support footnotes as in use on daringfireball.net and
+  implemented in other Markdown processors (tho not in Markdown.pl v1.0.1).
+* header-ids: Adds "id" attributes to headers. The id value is a slug of
+  the header text.
+* html-classes: Takes a dict mapping html tag names (lowercase) to a
+  string to use for a "class" tag attribute. Currently only supports
+  "pre" and "code" tags. Add an issue if you require this for other tags.
+* markdown-in-html: Allow the use of `markdown="1"` in a block HTML tag to
+  have markdown processing be done on its contents. Similar to
+  <http://michelf.com/projects/php-markdown/extra/#markdown-attr> but with
+  some limitations.
+* metadata: Extract metadata from a leading '---'-fenced block.
+  See <https://github.com/trentm/python-markdown2/issues/77> for details.
+* nofollow: Add `rel="nofollow"` to add `<a>` tags with an href. See
+  <http://en.wikipedia.org/wiki/Nofollow>.
+* pyshell: Treats unindented Python interactive shell sessions as <code>
+  blocks.
+* link-patterns: Auto-link given regex patterns in text (e.g. bug number
+  references, revision number references).
+* smarty-pants: Replaces ' and " with curly quotation marks or curly
+  apostrophes.  Replaces --, ---, ..., and . . . with en dashes, em dashes,
+  and ellipses.
+* toc: The returned HTML string gets a new "toc_html" attribute which is
+  a Table of Contents for the document. (experimental)
+* xml: Passes one-liner processing instructions and namespaced XML tags.
+* tables: Tables using the same format as GFM
+  <https://help.github.com/articles/github-flavored-markdown#tables> and
+  PHP-Markdown Extra <https://michelf.ca/projects/php-markdown/extra/#table>.
+* wiki-tables: Google Code Wiki-style tables. See
+  <http://code.google.com/p/support/wiki/WikiSyntax#Tables>.
+"""
 
 class Permission:
     FOLLOW=0x01
@@ -90,6 +156,9 @@ class User(UserMixin,db.Model):
     comments=db.relationship('Comment',backref='author',lazy='dynamic')
 
     def __init__(self,**kwargs):
+        """
+        用户类
+        """
         super(User,self).__init__(**kwargs)
         if self.role is None:
             if self.email==current_app.config['FLASKY_ADMIN']:
@@ -109,33 +178,21 @@ class User(UserMixin,db.Model):
     #修饰器，把方法做成属性
     @property
     def password(self):
-        """
-        将password定义成类的属性,并控制只可写不可读,当读取该属性时将会
-        抛出异常.
-        """
         raise AttributeError('passwoed is not a readable attribute')
     
     #设置属性的写
     @password.setter
-    def password(self,password):
-        """
-        password的写入,写入密码时通过调用WerkZeug的generate_password_hash接
-        口,生成hash值,然后存到password_hash字段.
-        """
+    def password(self,password): 
 	self.password_hash=generate_password_hash(password)
 
     #比较用户输入的密码和保存的密码
     def verify_password(self,password):
-        """
-        传入用户输入的密码,调用WerkZeug的check_password_has接口进行比较
+        """bijiao
         """
 	return check_password_hash(self.password_hash,password)
 
     #生成令牌
     def generate_confirmation_token(self,expiration=3600):
-        """
-        
-        """
         s=Serializer(current_app.config['SECRET_KEY'],expiration)
         token = s.dumps({'confirm':self.id})
         log.write('self.id=',self.id)

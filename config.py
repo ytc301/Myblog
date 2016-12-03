@@ -1,3 +1,9 @@
+#coding:utf-8
+#重新设置系统的默认编码格式
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
+#获取当前的绝对路径
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
