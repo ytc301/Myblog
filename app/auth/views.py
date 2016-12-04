@@ -27,6 +27,7 @@ def login():
             #重启浏览器后不用再重复输入用户名
             login_user(user,form.remeber_me.data)
             return redirect(request.args.get('next') or url_for('main.index'))
+        #用来在html中刷新消息,在html模板中通过flask开放的get_flashed_messages()可以获取flash消息.
         flash('用户名或密码错误!')
     #使用GET时,获取表单,渲染login.html,传入声明的登录表单对象
     return render_template('auth/login.html',form=form);

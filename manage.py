@@ -13,9 +13,22 @@ if os.environ.get('FLASK_COVERAGE'):
     COV=coverage.coverage(branch=True,include='app/*')
     COV.start()
 
+#FLASKY_CONFIG是环境变量,根据环境变量的获取不同的配置,
+#默认是获取开发配置
 app=create_app(os.getenv('FLASK_CONFIG') or 'default')
+
 manager=Manager(app)
+"""
+创建manage对象,该对象以flask的程序app为参数创建,后续进行
+app的管理,使启动服务器时支持命令行.
+Example:
+    开启服务器:python manage.py runserver
+"""
+
 migrate=Migrate(app,db)
+"""
+创建migrate对象,用来管理数据库的迁移等相关工作,Migrate接受两个参数
+"""
 
 def make_shell_context():
     return dict(app=app,db=db,User=User,Role=Role,Post=Post)
