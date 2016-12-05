@@ -31,6 +31,10 @@ class Role(db.Model):
     name=db.Column(db.String(64),unique=True)
     default = db.Column(db.Boolean,default=False,index=True)
     permissions=db.Column(db.Integer)
+    #users反向引用User,调用该字段时会自动生成和角色关联的用户列表
+    #backref会在User模型中生成一个字段role,表示用户的角色
+    #lazy='dynamic'设置引用users字段时可使用过滤器:
+    #   user_role.users.order_by(User.username).all()
     users=db.relationship('User',backref='role',lazy='dynamic')
 
     def __repr__(self):
@@ -68,6 +72,7 @@ class User(UserMixin,db.Model):
     email=db.Column(db.String(64),unique=True,index=True)
     username=db.Column(db.String(64),unique=True,index=True)
     password_hash=db.Column(db.String(128))
+    #设置roles表的role_id为外键.
     role_id=db.Column(db.Integer,db.ForeignKey('roles.id'))
     confirmed=db.Column(db.Boolean,default=False)
     name=db.Column(db.String(64))

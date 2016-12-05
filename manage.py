@@ -28,6 +28,7 @@ Example:
 migrate=Migrate(app,db)
 """
 创建migrate对象,用来管理数据库的迁移等相关工作,Migrate接受两个参数
+一个是flask的程序对象app,一个是SQLAlchemy数据库管理对象
 """
 
 def make_shell_context():
