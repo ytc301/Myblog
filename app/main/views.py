@@ -1,3 +1,4 @@
+#coding:utf-8
 from datetime import datetime
 from flask import render_template,session,redirect,url_for,current_app,flash,request,make_response
 from decorators import admin_required,permission_required
@@ -43,11 +44,15 @@ def for_admins_only():
 def for_moderators_only():
     return "for comment moderators!"
 
+#将username作为参数传给视图函数
 @main.route('/user/<username>')
 def user(username):
+    #根据username从数据库查序信息并构建user
     user=User.query.filter_by(username=username).first()
     if user is None:
+        #返回404错误
         abort(404)
+    #查询用户文章并按照时间戳降序排列
     posts=user.posts.order_by(Post.timestamp.desc()).all()
     return render_template('user.html',user=user,posts=posts)
 
@@ -67,6 +72,7 @@ def edit_profile():
     form.about_me.data=current_user.about_me
     return render_template('edit_profile.html',form=form)
 
+#将id限定为整形
 @main.route('/edit-profile/<int:id>',methods=['GET','POST'])
 @login_required
 @admin_required
